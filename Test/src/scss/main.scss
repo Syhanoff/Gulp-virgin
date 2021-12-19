@@ -1,0 +1,64 @@
+@import "var";
+@import "mixins";
+@import "fonts";
+
+
+body {
+   background-color: black;
+   font: 100 40px 'Roboto', sans-serif;
+}
+
+h1 {
+   color: brown;
+}
+
+.font-test {
+   color: #fff;
+   font-size: 30px;
+   display: grid;
+}
+
+ul {
+   display: block;
+}
+
+picture {
+   max-width: 100%;
+   object-fit: cover;
+ }
+
+img {
+   max-width: 100%;
+   object-fit: cover;
+ }
+
+//  .div {
+//     width: 75%;
+//     display: block;
+//  }
+
+.red {
+   width: 100px;
+   height: 100px;
+   background-color: red;
+}
+
+.cube {
+   width: 100px;
+   height: 500px;
+   background-color: #000;
+   box-sizing: border-box;
+   margin: 15px;
+}
+
+.svg-test {
+   color: #fff;
+}
+
+
+.webptest {
+   display: block;
+   width: 80%;
+   height: 100vh;
+   background: #000 url('../img/3000x1875-px-canyon-landscape-mountain-nature-Palouse-Falls-river-Washington-state-waterfall-1104691.jpg') no-repeat center top / cover;
+}
