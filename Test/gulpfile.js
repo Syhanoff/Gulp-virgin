@@ -20,11 +20,14 @@ const changed = require('gulp-changed');
 const tiny = require('gulp-tinypng-compress');
 const imagemin = require('gulp-imagemin');
 const webp = require('imagemin-webp');
+const realFavicon = require ('gulp-real-favicon');
 const svgSprite = require('gulp-svg-sprite');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify-es').default;
 const concat = require('gulp-concat');
 const del = require('del');
+
+const config = require('./config.js');
 
 
 
@@ -42,7 +45,9 @@ const configPath = {
          svg : app + 'img/svg/*.svg',
          js : [app + 'js/**/*.js', '!' + app + 'js/libs/*.js'],
          jsLib : app + 'js/libs/*.js',
-         assets : app + 'assets/**/*.*',
+         assets : [app + 'assets/**/*.*','!' + app + 'assets/favicon/*.*'],
+         fav : app + 'assets/favicon/*.png',
+         favCode : app + 'parts/favicon.html'
    },
    dist : {
          html : dist,
@@ -53,6 +58,8 @@ const configPath = {
          svg : dist + 'img/svg/',
          js : dist + 'js/',
          assets : dist,
+         fav: app + 'assets/favicon/',
+         favCode : app + 'parts/'
    },
    watch : {
          html : app + '**/*.html',
@@ -63,7 +70,7 @@ const configPath = {
          imgWebp : [app + 'img/**/*.+(jpeg|jpg|png|gif)', '!' + app + 'img/svg/*.svg'],
          svg : app + 'img/svg/*.svg',
          js : app + 'js/**/*.js',
-         assets : app + 'assets/**/*.*',
+         assets : [app + 'assets/**/*.*','!' + app + 'assets/favicon/*.*'],
    }
 }
 
@@ -254,6 +261,86 @@ function svgTask () {
 		.pipe(dest(configPath.dist.svg))
 }
 
+var FAVICON_DATA_FILE = 'faviconData.json';
+
+function nameFavicon () {
+   return src(configPath.app.fav)
+   .pipe(rename({
+      basename: "favicon"
+   }))
+   .pipe(dest(configPath.dist.fav))
+}
+
+function genFavicon (done) {
+   realFavicon.generateFavicon({
+      masterPicture: './src/assets/favicon/favicon.png',
+      dest: './dist/favicon',
+      iconsPath: './favicon/',
+      design: {
+         ios: {
+            pictureAspect: 'noChange',
+            assets: {
+               ios6AndPriorIcons: false,
+               ios7AndLaterIcons: false,
+               precomposedIcons: false,
+               declareOnlyDefaultIcon: true
+            } 
+         },
+         desktopBrowser: {
+            design: 'raw'
+         },
+         windows: {
+            pictureAspect: 'noChange',
+            backgroundColor: '#ffffff',
+            onConflict: 'override',
+            assets: {
+               windows80Ie10Tile: false,
+               windows10Ie11EdgeTiles: {
+                  small: false,
+                  medium: true,
+                  big: false,
+                  rectangle: false
+               }
+            }
+         },
+         androidChrome: {
+            pictureAspect: 'noChange',
+            themeColor: '#ffffff',
+            manifest: {
+               display: 'standalone',
+               orientation: 'notSet',
+               onConflict: 'override',
+               declared: true
+            },
+            assets: {
+               legacyIcon: false,
+               lowResolutionIcons: false
+            }
+         },
+         safariPinnedTab: {
+            pictureAspect: 'silhouette',
+            themeColor: '#ffffff'
+         }
+      },
+      settings: {
+         scalingAlgorithm: 'Mitchell',
+         errorOnImageTooSmall: false,
+         readmeFile: false,
+         htmlCodeFile: false,
+         usePathAsIs: false
+      },
+      markupFile: FAVICON_DATA_FILE
+   })
+   done();
+}
+
+function insertFavicon (done) {
+      src(configPath.app.favCode)
+      .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
+      .pipe(dest(configPath.dist.favCode))
+   done();
+}
+
 function scriptsTask () {
    src(configPath.app.jsLib)
    .pipe(concat('lib.min.js'))
@@ -280,5 +367,6 @@ function clear () {
 }
 
 exports.clear = clear
+exports.newFavicon = series(nameFavicon, genFavicon, insertFavicon)
 exports.default = series(clear, parallel(htmlTask, imgTask, svgTask, fontsOldTask, fontsTask, assetsTask, scriptsTask), fontStyleTask, stylesTask, webServer);
 exports.build = series(toBuild, clear, parallel(htmlTask, imgTask, svgTask, fontsOldTask, fontsTask, assetsTask, scriptsTask), fontStyleTask, stylesTask);
