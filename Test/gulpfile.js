@@ -27,10 +27,6 @@ const uglify = require('gulp-uglify-es').default;
 const concat = require('gulp-concat');
 const del = require('del');
 
-const config = require('./config.js');
-
-
-
 const app = 'src/';
 const dist = 'dist/';
 const configPath = {
