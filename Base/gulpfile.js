@@ -20,8 +20,8 @@ const changed = require('gulp-changed');
 const tiny = require('gulp-tinypng-compress');
 const imagemin = require('gulp-imagemin');
 const webp = require('imagemin-webp');
-const realFavicon = require ('gulp-real-favicon');
 const svgSprite = require('gulp-svg-sprite');
+const realFavicon = require ('gulp-real-favicon');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify-es').default;
 const concat = require('gulp-concat');
@@ -31,7 +31,7 @@ const app = 'src/';
 const dist = 'dist/';
 const configPath = {
    app : {
-         html : [app + '*.html', "!" + app + '_*.html'],
+         html : app + '*.html',
          style : app + 'scss/**/*.+(scss|sass)',
          fonts : app + 'fonts/*.ttf',
          styleFonts : app + 'scss/_fonts.scss',
@@ -39,11 +39,11 @@ const configPath = {
          img : [app + 'img/**/*.+(jpeg|jpg|png|svg|gif)', '!' + app + 'img/svg/*.svg'],
          imgWebp : [app + 'img/**/*.+(jpeg|jpg|png|gif)', '!' + app + 'img/svg/*.svg'],
          svg : app + 'img/svg/*.svg',
+         fav : app + 'assets/favicon/*.png',
+         favCode : app + 'parts/favicon.html',
          js : [app + 'js/**/*.js', '!' + app + 'js/libs/*.js'],
          jsLib : app + 'js/libs/*.js',
-         assets : [app + 'assets/**/*.*','!' + app + 'assets/favicon/*.*'],
-         fav : app + 'assets/favicon/*.png',
-         favCode : app + 'parts/favicon.html'
+         assets : [app + 'assets/**/*.*','!' + app + 'assets/favicon/*.*']
    },
    dist : {
          html : dist,
@@ -52,10 +52,10 @@ const configPath = {
          fontsOld : app + 'fonts/',
          img : dist + 'img/',
          svg : dist + 'img/svg/',
-         js : dist + 'js/',
-         assets : dist,
          fav: app + 'assets/favicon/',
-         favCode : app + 'parts/'
+         favCode : app + 'parts/',
+         js : dist + 'js/',
+         assets : dist
    },
    watch : {
          html : app + '**/*.html',
