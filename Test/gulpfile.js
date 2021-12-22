@@ -236,7 +236,7 @@ function imgTask () {
       .pipe(dest(configPath.dist.img))
       .pipe(src(configPath.app.img))
       .pipe(gulpif(noBuild, tiny({
-         key: '24gssBqFNsMFgtk2Kd3lVH66C8yKdggm',
+         key: '.',
          sigFile: 'images/.tinypng-sigs',
          parallel: true,
          parallelMax: 50,
