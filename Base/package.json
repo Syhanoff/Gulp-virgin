@@ -1,8 +1,8 @@
 {
-  "name": "my-gulp",
+  "name": "gulp-base",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "builder for layout",
+  "main": "gulpfile.js",
   "scripts": {
     "dev": "gulp",
     "build": "gulp build"
@@ -41,6 +41,7 @@
     "gulp-webp-html-fix": "^1.0.3",
     "gulp-webpcss": "^1.1.1",
     "imagemin-webp": "^6.0.0",
-    "sass": "^1.43.5"
+    "sass": "^1.43.5",
+    "webp-converter": "^2.2.3"
   }
 }
