@@ -339,7 +339,7 @@ function insertFavicon (done) {
 
 function scriptsTask () {
    src(configPath.app.jsLib)
-   .pipe(concat('lib.min.js'))
+   .pipe(concat('libs.min.js'))
    .pipe(gulpif(noBuild, uglify().on("error", notify.onError())))
    .pipe(dest(configPath.dist.js))
 return src(configPath.app.js)
