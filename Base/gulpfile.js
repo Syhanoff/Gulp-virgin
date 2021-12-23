@@ -32,7 +32,8 @@ const dist = 'dist/';
 const configPath = {
    app : {
          html : app + '*.html',
-         style : app + 'scss/**/*.+(scss|sass)',
+         style : [app + 'scss/**/*.+(scss|sass)', '!' + app + 'scss/libs/*.*', '!' + app + 'scss/libs.scss'],
+         styleLibs : app + 'scss/libs.scss',
          fonts : app + 'fonts/*.ttf',
          styleFonts : app + 'scss/_fonts.scss',
          fontsOld : app + 'fonts/*.eot',
@@ -42,7 +43,7 @@ const configPath = {
          fav : app + 'assets/favicon/*.png',
          favCode : app + 'parts/favicon.html',
          js : [app + 'js/**/*.js', '!' + app + 'js/libs/*.js'],
-         jsLib : app + 'js/libs/*.js',
+         jsLibs : app + 'js/libs/*.js',
          assets : [app + 'assets/**/*.*','!' + app + 'assets/favicon/*.*']
    },
    dist : {
@@ -107,6 +108,15 @@ function htmlTask () {
 }
 
 function stylesTask () {
+      src(configPath.app.styleLibs)
+      .pipe(sass.sync({outputStyle: 'expanded'}).on('error', notify.onError()))
+      .pipe(rename({
+         suffix: ".min"
+      }))
+      .pipe(gulpif(noBuild, cleanCSS({
+         level: 2
+      })))
+      .pipe(dest(configPath.dist.style))
    return src(configPath.app.style)
       .pipe(gulpif(!noBuild, sourcemaps.init()))
       .pipe(sass.sync({outputStyle: 'expanded'}).on('error', notify.onError()))
@@ -338,7 +348,7 @@ function insertFavicon (done) {
 }
 
 function scriptsTask () {
-   src(configPath.app.jsLib)
+   src(configPath.app.jsLibs)
    .pipe(concat('libs.min.js'))
    .pipe(gulpif(noBuild, uglify().on("error", notify.onError())))
    .pipe(dest(configPath.dist.js))
