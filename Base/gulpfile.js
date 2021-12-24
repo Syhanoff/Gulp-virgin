@@ -35,7 +35,7 @@ const configPath = {
          style : [app + 'scss/**/*.+(scss|sass)', '!' + app + 'scss/libs/*.*', '!' + app + 'scss/libs.scss'],
          styleLibs : app + 'scss/libs.scss',
          fonts : app + 'fonts/*.ttf',
-         styleFonts : app + 'scss/_fonts.scss',
+         styleFonts : app + 'scss/base/_fonts.scss',
          fontsOld : app + 'fonts/*.eot',
          img : [app + 'img/**/*.+(jpeg|jpg|png|svg|gif)', '!' + app + 'img/svg/*.svg'],
          imgWebp : [app + 'img/**/*.+(jpeg|jpg|png|gif)', '!' + app + 'img/svg/*.svg'],
