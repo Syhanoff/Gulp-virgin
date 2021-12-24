@@ -168,28 +168,55 @@ function checkWeight (fontname) {
       case/Thin/.test(fontname):
          weight = 100;
          break;
+      case/100/.test(fontname):
+         weight = 100;
+         break;
       case/ExtraLight/.test(fontname):
+         weight = 200;
+         break;
+      case/200/.test(fontname):
          weight = 200;
          break;
       case/Light/.test(fontname):
          weight = 300;
          break;
+      case/300/.test(fontname):
+         weight = 300;
+         break;
       case/Regular/.test(fontname):
          weight = 400;
          break;
-         case/Medium/.test(fontname):
+      case/400/.test(fontname):
+         weight = 400;
+         break;
+      case/Medium/.test(fontname):
          weight = 500;
          break;
-      case/Bold/.test(fontname):
+      case/500/.test(fontname):
+         weight = 500;
+         break;
+      case/SemiBold/.test(fontname):
          weight = 600;
+         break;
+      case/600/.test(fontname):
+         weight = 600;
+         break;
+      case/Bold/.test(fontname):
+         weight = 700;
+         break;
+      case/700/.test(fontname):
+         weight = 700;
          break;
       case/ExtraBold/.test(fontname):
          weight = 800;
          break;
-      case/Heavy/.test(fontname):
-         weight = 700;
+      case/800/.test(fontname):
+         weight = 800;
          break;
       case/Black/.test(fontname):
+         weight = 900;
+         break;
+      case/900/.test(fontname):
          weight = 900;
          break;
       default:

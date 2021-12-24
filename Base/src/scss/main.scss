@@ -1,7 +1,9 @@
-@import "vars";
-@import "mixins";
-@import "fonts";
-@import "settings";
+@import "./base/vars";
+@import "./base/mixins";
+@import "./base/fonts";
+@import "./base/spec";
+@import "./base/global";
+@import "./base/buttons";
 
 @import "./block/header";
 @import "./block/footer";
