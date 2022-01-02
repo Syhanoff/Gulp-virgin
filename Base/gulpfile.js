@@ -125,8 +125,7 @@ function stylesTask () {
          prefix: "",
          suffix: ".min"
       }))
-      .pipe(autoprefixer({
-         overrideBrowserslist: ['last 10 versions'],		
+      .pipe(autoprefixer({	
          cascade: false,
          grid: true
       }))
