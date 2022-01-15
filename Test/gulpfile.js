@@ -2,7 +2,7 @@ const {src, dest, watch, parallel, series} = require('gulp');
 const browserSync = require('browser-sync').create();
 const include = require('gulp-file-include');
 const htmlmin = require('gulp-htmlmin');
-const webpHtml = require('gulp-webp-html-fix');
+// const webpHtml = require('gulp-webp-html-fix');
 const gulpif = require('gulp-if');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass')(require('sass'));
@@ -10,7 +10,7 @@ const notify = require("gulp-notify");
 const rename = require("gulp-rename");
 const autoprefixer = require('gulp-autoprefixer');
 const group = require('gulp-group-css-media-queries');
-const webpCSS = require("gulp-webpcss");
+// const webpCSS = require("gulp-webpcss");
 const cleanCSS = require('gulp-clean-css');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
@@ -19,13 +19,22 @@ const fs = require('fs');
 const changed = require('gulp-changed');
 const tiny = require('gulp-tinypng-compress');
 const imagemin = require('gulp-imagemin');
-const webp = require('imagemin-webp');
+// const webp = require('imagemin-webp');
 const realFavicon = require ('gulp-real-favicon');
 const svgSprite = require('gulp-svg-sprite');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify-es').default;
 const concat = require('gulp-concat');
 const del = require('del');
+
+// const avifHtml = require("gulp-avif-html")
+// const imageminAvif = require('imagemin-avif');
+// const gulpAvif = require('gulp-avif');
+const pictureHtml = require('gulp-avif-webp');
+const imgResponsive = require("gulp-sharp-responsive");
+const imgCss = require("gulp-avif-css")
+
+
 
 const app = 'src/';
 const dist = 'dist/';
@@ -98,7 +107,8 @@ function toBuild (done) {
 function htmlTask () {
    return src(configPath.app.html)
       .pipe(include())
-      .pipe(webpHtml())
+      .pipe(pictureHtml())
+      // .pipe(lazy())
       .pipe(gulpif(noBuild, htmlmin({
          collapseWhitespace: true,
          removeComments: true
@@ -120,10 +130,14 @@ function stylesTask () {
          cascade: false,
          grid: true
       }))
-      .pipe(webpCSS({
-         webpClass: '',
-         noWebpClass: '.no-webp'
-      }))
+      // .pipe(webpCSS({
+      //    webpClass: '',
+      //    noWebpClass: '.no-webp'
+      // }))
+
+      .pipe(imgCss())
+
+
       .pipe(group())
       .pipe(gulpif(noBuild, cleanCSS({
 			level: 2,
@@ -225,16 +239,16 @@ function fontStyleTask (done) {
 }
 
 function imgTask () {
-	return src(configPath.app.imgWebp)
-      .pipe(changed(configPath.dist.img))
-      .pipe(imagemin([webp({ 
-         quality: 70,
-      })])) 
-      .pipe(rename({
-         extname: '.webp'
-      }))
-      .pipe(dest(configPath.dist.img))
-      .pipe(src(configPath.app.img))
+	// return src(configPath.app.imgWebp)
+   //    .pipe(changed(configPath.dist.img))
+   //    .pipe(imagemin([webp({ 
+   //       quality: 70,
+   //    })])) 
+   //    .pipe(rename({
+   //       extname: '.webp'
+   //    }))
+   //    .pipe(dest(configPath.dist.img))
+   return src(configPath.app.img)
       .pipe(gulpif(noBuild, tiny({
          key: '.',
          sigFile: 'images/.tinypng-sigs',
@@ -244,6 +258,34 @@ function imgTask () {
       })))
       .pipe(dest(configPath.dist.img))
 }
+
+function imgDevTask () {
+	return src(configPath.app.img)
+    .pipe(imagemin([
+      imagemin.mozjpeg({
+        quality: 80,
+        progressive: true
+        }),
+      imagemin.optipng({
+        optimizationLevel: 2
+        }),
+    ]))
+    .pipe(dest(configPath.dist.img))
+}
+
+
+function imgWeb () {
+   return src(configPath.app.imgWebp)
+   .pipe(imgResponsive({
+      formats: [
+         { format: "webp" },
+         { format: "avif" }
+      ]
+   }))
+   .pipe(dest(configPath.dist.img))
+}
+
+
 
 function svgTask () {
 	return src(configPath.app.svg)
@@ -364,5 +406,5 @@ function clear () {
 
 exports.clear = clear
 exports.newFavicon = series(nameFavicon, genFavicon, insertFavicon)
-exports.default = series(clear, parallel(htmlTask, imgTask, svgTask, fontsOldTask, fontsTask, assetsTask, scriptsTask), fontStyleTask, stylesTask, webServer);
+exports.default = series(clear, parallel(htmlTask, imgDevTask, imgWeb, svgTask, fontsOldTask, fontsTask, assetsTask, scriptsTask), fontStyleTask, stylesTask, webServer);
 exports.build = series(toBuild, clear, parallel(htmlTask, imgTask, svgTask, fontsOldTask, fontsTask, assetsTask, scriptsTask), fontStyleTask, stylesTask);
