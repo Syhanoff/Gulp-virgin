@@ -1,3 +1,14 @@
+"gulp-cheerio": "^1.0.0",
+"gulp-replace": "^1.1.3",
+"gulp-svgmin": "^4.1.0",
+"gulp-zip": "^5.1.0",
+"postcss": "^8.4.5",
+"postcss-scss": "^4.0.2",
+"webpack": "^5.65.0",
+"webpack-stream": "^7.0.0"
+
+
+
 const svgSprite = require('gulp-svg-sprite');
 const svgmin = require('gulp-svgmin');
 const cheerio = require('gulp-cheerio');

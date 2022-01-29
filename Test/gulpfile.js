@@ -2,7 +2,6 @@ const {src, dest, watch, parallel, series} = require('gulp');
 const browserSync = require('browser-sync').create();
 const include = require('gulp-file-include');
 const htmlmin = require('gulp-htmlmin');
-// const webpHtml = require('gulp-webp-html-fix');
 const gulpif = require('gulp-if');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass')(require('sass'));
@@ -10,7 +9,6 @@ const notify = require("gulp-notify");
 const rename = require("gulp-rename");
 const autoprefixer = require('gulp-autoprefixer');
 const group = require('gulp-group-css-media-queries');
-// const webpCSS = require("gulp-webpcss");
 const cleanCSS = require('gulp-clean-css');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
@@ -19,20 +17,46 @@ const fs = require('fs');
 const changed = require('gulp-changed');
 const tiny = require('gulp-tinypng-compress');
 const imagemin = require('gulp-imagemin');
-// const webp = require('imagemin-webp');
 const realFavicon = require ('gulp-real-favicon');
 const svgSprite = require('gulp-svg-sprite');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify-es').default;
 const concat = require('gulp-concat');
 const del = require('del');
-
-// const avifHtml = require("gulp-avif-html")
-// const imageminAvif = require('imagemin-avif');
-// const gulpAvif = require('gulp-avif');
 const pictureHtml = require('gulp-avif-webp');
 const imgResponsive = require("gulp-sharp-responsive");
 const imgCss = require("gulp-avif-css")
+
+
+
+// import gulpp from 'gulp';
+// import browserSync from 'browser-sync';
+// import include from 'gulp-file-include';
+// import htmlmin from 'gulp-htmlmin';
+// import gulpif from 'gulp-if';
+// import sourcemaps from 'gulp-sourcemaps';
+// import sass from 'gulp-sass';
+// import notify from "gulp-notify";
+// import rename from 'gulp-rename';
+// import autoprefixer from 'gulp-autoprefixer';
+// import group from 'gulp-group-css-media-queries';
+// import cleanCSS from 'gulp-clean-css';
+// import ttf2woff from 'gulp-ttf2woff';
+// import ttf2woff2 from 'gulp-ttf2woff2';
+// import fonter from 'gulp-fonter';
+// import fs from 'fs';
+// import changed from 'gulp-changed';
+// import tiny from 'gulp-tinypng-compress';
+// import imagemin from 'gulp-imagemin';
+// import realFavicon from 'gulp-real-favicon';
+// import svgSprite from 'gulp-svg-sprite';
+// import babel from 'gulp-babel';
+// import uglify from 'gulp-uglify-es';
+// import concat from 'gulp-concat';
+// import del from 'del';
+// import pictureHtml from 'gulp-avif-webp';
+// import imgResponsive from 'gulp-sharp-responsive';
+// import imgCss from 'gulp-avif-css'
 
 
 
