@@ -101,6 +101,12 @@ function toBuild (done) {
 function htmlTask () {
   return src(configPath.app.html)
     .pipe(include())
+    .pipe(plumber(
+      notify.onError({
+      title: "HTML",
+      message: "Error: <%= error.message %>"
+      })
+    ))
     .pipe(imgHTML())
     .pipe(typograf({
       locale: ['ru', 'en-US']
