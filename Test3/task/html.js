@@ -18,6 +18,7 @@ const htmlmin = require('gulp-htmlmin');
 // Конфигурация
 const route = require('../config/route');
 const setting = require('../config/setting');
+const noBuild = require('../config/release');
 
 
 // Обработка HTML
@@ -42,11 +43,3 @@ const htmlTask = () => {
 }
 
 module.exports = htmlTask;
-
-
-
-let noBuild = false;
-function toBuild (done) {
-  noBuild = true;
-  done();
-};

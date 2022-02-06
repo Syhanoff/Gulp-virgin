@@ -4,17 +4,13 @@ const { src, dest } = require('gulp');
 // Плагины
 const plumber = require('gulp-plumber');
 const notify = require("gulp-notify");
-const size = require('gulp-size');
-const gulpif = require('gulp-if');
-const rename = require("gulp-rename");
-const changed = require('gulp-changed');
 const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
 
 
 // Конфигурация
 const route = require('../config/route');
-const setting = require('../config/setting');
+const noBuild = require('../config/release');
 
 
 // Обработка JavaScript

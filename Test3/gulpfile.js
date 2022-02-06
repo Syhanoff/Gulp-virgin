@@ -1,19 +1,6 @@
-const {src, dest, watch, parallel, series} = require('gulp');
-const browserSync = require('browser-sync').create();
-const del = require('del');
-
 // Плагины
-const plumber = require('gulp-plumber');
-const notify = require("gulp-notify");
-const size = require('gulp-size');
-const gulpif = require('gulp-if');
-const rename = require("gulp-rename");
-const changed = require('gulp-changed');
-const fs = require('fs');
-// const path = require('path');
-// const rootFolder = path.basename(path.resolve());
-const util = require('gulp-util');
-const ftp = require('vinyl-ftp');
+const { watch, parallel, series } = require('gulp');
+const browserSync = require('browser-sync').create();
 
 
 // Конфигурация
@@ -32,6 +19,7 @@ const imgTask = require('./task/image');
 const svgTask = require('./task/svg');
 const assetsTask = require('./task/assets');
 const zipTask = require('./task/zip');
+const ftpTask = require('./task/ftp');
 
 const nameFavTask = require('./task/favicon');
 const genFavTask = require('./task/favicon');
@@ -63,18 +51,6 @@ const watcherTask = () => {
 }
 
 
-
-let noBuild = false;
-function toBuild (done) {
-  noBuild = true;
-  done();
-};
-
-
-
-
-
-
 // Запуск задач
 exports.del = clear;
 exports.html = htmlTask;
@@ -88,16 +64,13 @@ exports.img = imgTask;
 exports.svg = svgTask;
 exports.assets = assetsTask;
 exports.zip = zipTask;
+exports.ftp = ftpTask;
 
 exports.favicon = series(nameFavTask, genFavTask, insertFavTask);
 exports.nameFav = nameFavTask;
 exports.genFav = genFavTask;
 exports.insertFav = insertFavTask;
 
-
-
-
-// exports.ftp = ftpTask
 
 // Сборка
 exports.default = series(clear, parallel(htmlTask, imgTask, svgTask, fontsEotTask, fontsTtfTask, assetsTask, scriptsTask), stylesTask, parallel(watcherTask, serverTask));

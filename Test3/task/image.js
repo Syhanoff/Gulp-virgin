@@ -5,7 +5,6 @@ const { src, dest } = require('gulp');
 const plumber = require('gulp-plumber');
 const notify = require("gulp-notify");
 const changed = require('gulp-changed');
-// const tiny = require('gulp-tinypng-compress');
 const imagemin = require('gulp-imagemin');
 const imgSharp = require("gulp-sharp-responsive");
 

@@ -12,20 +12,14 @@ const ftp = require('vinyl-ftp');
 
 // Конфигурация
 const route = require('../config/route');
-const setting = require('../config/setting');
-
+const ftp = require('../config/ftp');
+const ftpFolder = require('../config/ftp');
 
 
 // Деплой на сервер
 const ftpTask = () => {
-  let configFTP = ftp.create ({
-    host: "",
-    user: "",
-    password: "",
-    parallel: 10
-  });
+  let configFTP = ftp.create (ftp.config);
   configFTP.log = util.log
-  const ftpFolder = ``;
   return src(route.deploy.src, {})
     .pipe(plumber(
     notify.onError({

@@ -63,8 +63,7 @@ module.exports = {
   },
   renameFav: {
     basename: "favicon"
-  },
-
+  }
 }
 
 
