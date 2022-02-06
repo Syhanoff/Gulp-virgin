@@ -1,0 +1,67 @@
+.promo {
+  padding: 21px 0 93px;
+  background: url('@img/bg.jpg') no-repeat center top / cover;
+
+  // @include bg-url('../img/bg.jpg', '../img/bg.webp', '../img/bg.avif') ;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: $primary-color;
+  }
+
+  &__title {
+    @include adaptiv-font(42, 36);
+    margin: 91px 0 0;
+    line-height: 1;
+
+  }
+
+  &__subtitle {
+    @include adaptiv-font(24, 18);
+    margin-top: 17px;
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    width: 424px;
+    height: 96px;
+  }
+
+  &__icon {
+    max-width: 110px;
+    width: 100%;
+  }
+
+  &__img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__desc {
+    text-align: center;
+    line-height: 1;
+    margin-top: 20px;
+  }
+
+  &__button {
+    font-size: 16px;
+    max-width: 300px;
+    width: 100%;
+    padding: 12px 0 13px;
+    margin-top: 67px;
+  }
+
+  &__more {
+    margin-top: 8px;
+    font-size: 16px;
+    text-align: center;
+
+    &_link {
+      text-decoration-line: underline;
+      color: inherit;
+    }
+  }
+}

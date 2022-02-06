@@ -1,0 +1,35 @@
+.comment {
+  padding-bottom: 48px;
+  &__title {
+    @include adaptiv-font(30, 26);
+    text-align: center;
+  }
+  &__wrapper {
+    display: flex;
+    margin-top: 60px;
+  }
+  &__img {
+    margin-right: 60px;
+    display: block;
+  }
+  &__inner {
+    max-width: 650px;
+    width: 100%;
+  }
+  &__subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: none;
+  }
+  &__label {
+    color: #646464;
+  }
+  &__txt {
+    margin-top: 20px;
+    @include adaptiv-font(16, 14);
+    &:nth-of-type(2) {
+      margin-top: 10px;
+    }
+  }
+}
+

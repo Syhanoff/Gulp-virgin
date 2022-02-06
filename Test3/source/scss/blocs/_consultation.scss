@@ -1,0 +1,46 @@
+// 1
+.consultation {
+  background: url('@img/bg2.jpg') no-repeat center / cover;
+}
+
+.consultation {
+  padding: 100px 0 108px;
+  &__title {
+    @include adaptiv-font(36, 26);
+    color: $primary-color;
+    max-width: 800px;
+    width: 100%;
+  }
+  &__desc {
+    margin-top: 8px;
+    font-size: 20px;
+    color: $primary-color;
+    font-weight: 500;
+  }
+  &__form {
+    margin-top: 36px;
+    .error {
+      color: $primary-color
+    }
+  }
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 303px;
+  width: 100%;
+  input {
+    padding: 20px 25px;
+    border-radius: 5px;
+    color: #4B4B4B;
+    &:not(:first-child ) {
+      margin-top: 15px;
+    }
+  }
+  &__btn {
+    margin-top: 19px;
+    font-size: 16px;
+    padding: 14px 0 16px;
+  }
+}
+

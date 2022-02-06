@@ -1,0 +1,28 @@
+.carousel {
+  padding: 81px 0;
+  &__inner {
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    .slick-prev {
+      background: url('@img/chevron_left.svg') no-repeat center / cover;
+      width: 31px;
+      height: 50px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -66px;
+    }
+    .slick-next {
+      background: url('@img/chevron_right.svg') no-repeat center / cover;
+      width: 30px;
+      height: 50px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: -70px;
+    }
+  }
+
+}

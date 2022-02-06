@@ -1,0 +1,17 @@
+.btn {
+  border-radius: 5px;
+  background-color: $accent-color;
+  color: $primary-color;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.5s ease;
+}
+
+.btn:hover {
+  background: #970B0B;
+}
+
+.btn:active {
+  background: #DF0000;
+}

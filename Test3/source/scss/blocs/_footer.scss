@@ -1,0 +1,41 @@
+.footer {
+  position: relative;
+  &__map {
+    iframe {
+      height: 630px;
+      width: 100%;
+    }
+  }
+  &__info {
+    max-width: 460px;
+    width: 100%;
+    height: 270px;
+    background-color: $accent-color;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  &__adress {
+    font-weight: 500;
+    font-size: 20px;
+    color: $primary-color;
+    font-style: normal;
+    margin-top: 50px;
+  }
+  &__phone {
+    font-weight: 300;
+    font-size: 20px;
+    color: $primary-color;
+    margin-top: 36px;
+    display: block;
+  }
+  &__social {
+    width: 212px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-top: 36px;
+  }
+}

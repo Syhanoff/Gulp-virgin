@@ -1,0 +1,29 @@
+<div class="overlay">
+  <div class="modal" id="modal-consultation">
+    <h2 class="modal__title">Просто заполните форму заявки</h2>
+    <p class="modal__descr">и мы перезвоним вам в течении 10 минут</p>
+    <form action="send.php" class="modal__form form" id="consultation-form">
+      <input type="text" name="name" class="form__name" placeholder="Ваше имя">
+      <input type="tel" name="phone" class="form__phone" placeholder="Ваш телефон">
+      <input type="email" name="email" class="form__email"  placeholder="Ваш e-mail">
+      <button type="submit" class="form__btn btn">заказать кОНСУЛЬТАЦИЮ</button>
+    </form>
+    <div class="modal__close">&times;</div>
+  </div>
+  <div class="modal" id="modal-order">
+    <h2 class="modal__title">Ваш заказ:</h2>
+    <p class="modal__descr">Пульсометр Polar FT1</p>
+    <form action="#" class="modal__form form" id="order-form">
+      <input type="text" name="name" class="form__name" placeholder="Ваше имя" required>
+      <input type="tel" name="phone" class="form__phone" placeholder="Ваш телефон" required>
+      <input type="email" name="email" class="form__email"  placeholder="Ваш e-mail" required>
+      <button type="submit" class="form__btn btn">Купить</button>
+    </form>
+    <div class="modal__close">&times;</div>
+  </div>
+  <div class="modal modal_mini" id="modal-thanks">
+    <h2 class="modal__title">Спасибо за вашу заявку!</h2>
+    <p class="modal__descr">Наш менеджер свяжется с вами в ближайшее время!</p>
+    <div class="modal__close">&times;</div>
+  </div>
+</div>
