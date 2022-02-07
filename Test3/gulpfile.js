@@ -53,13 +53,14 @@ const watcherTask = () => {
 
 // Запуск задач
 exports.del = clear;
+exports.server = serverTask;
+exports.wather = watcherTask;
 exports.html = htmlTask;
 exports.scss = stylesTask;
 exports.js = scriptsTask;
 exports.clear = clear;
 exports.fonts = series(fontsEotTask, fontsTtfTask);
 exports.fontFace = fontFaceTask;
-exports.wather = watcherTask;
 exports.img = imgTask;
 exports.svg = svgTask;
 exports.assets = assetsTask;
@@ -73,7 +74,7 @@ exports.insertFav = insertFavTask;
 
 
 // Сборка
-exports.default = series(clear, parallel(htmlTask, imgTask, svgTask, fontsEotTask, fontsTtfTask, assetsTask, scriptsTask), stylesTask, parallel(watcherTask, serverTask));
+exports.default = series(del, parallel(html, img, svg, fonts, fontFace, assets, js), scss, parallel(watcher, server));
 
 
 // exports.default = series(clear, parallel(htmlTask, imgTask, svgTask, fontsEotTask, fontsTtfTask, assetsTask, scriptsTask), fontStyleTask, stylesTask, parallel(watcherTask, serverTask));

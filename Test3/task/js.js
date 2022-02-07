@@ -24,7 +24,10 @@ const scriptsTask = () => {
     ))
     .pipe(babel())
     .pipe(webpack({
-      mode: "development"
+      mode: noBuild ? 'production' : 'development',
+      output: {
+        filename: 'main.min.js'
+      }
     }))
     // .pipe(webpack({
     //   mode: noBuild ? 'production' : 'development',

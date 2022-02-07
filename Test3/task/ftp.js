@@ -12,7 +12,7 @@ const ftp = require('vinyl-ftp');
 
 // Конфигурация
 const route = require('../config/route');
-const ftp = require('../config/ftp');
+const ftpClient= require('../config/ftp');
 const ftpFolder = require('../config/ftp');
 
 
