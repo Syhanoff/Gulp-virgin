@@ -1,8 +1,8 @@
 module.exports = {
   config: {
-    host: "",
-    user: "",
-    password: "",
+    host: "a312145.ftp.mchost.ru",
+    user: "a312145_boss_off",
+    password: "51TOrj6mD3",
     parallel: 10
   }
 }

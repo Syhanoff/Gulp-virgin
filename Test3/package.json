@@ -8,18 +8,18 @@
     "code": "editorconfig-checker",
     "dev": "gulp",
     "build": "gulp build",
-    "zip": "gulp deployZip",
-    "ftp": "gulp deployFtp"
+    "zip": "gulp zip",
+    "ftp": "gulp ftp"
   },
   "browserslist": [
-   "last 2 versions",
-   "> 1%",
-   "not dead"
- ],
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ],
   "babel": {
-      "presets": [
-         "@babel/preset-env"
-      ]
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "author": "Syhanoff",
   "license": "ISC",
@@ -53,6 +53,7 @@
     "gulp-sass": "^5.0.0",
     "gulp-sass-glob": "^1.1.0",
     "gulp-sharp-responsive": "^0.3.0",
+    "gulp-shorthand": "^1.1.0",
     "gulp-size": "^4.0.1",
     "gulp-svg-sprite": "^1.5.0",
     "gulp-tinypng-compress": "^1.2.5",
@@ -72,8 +73,6 @@
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "acorn": "^8.7.0",
-    "gulp-shorthand": "^1.1.0",
-    "jquery": "^3.6.0"
+    "acorn": "^8.7.0"
   }
 }

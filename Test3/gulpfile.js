@@ -21,9 +21,9 @@ const assets = require('./task/assets');
 const zip = require('./task/zip');
 const ftp = require('./task/ftp');
 
-const nameFavTask = require('./task/favicon');
-const genFavTask = require('./task/favicon');
-const insertFavTask = require('./task/favicon');
+const nameFav = require('./task/favicon');
+const genFav = require('./task/favicon');
+const insertFav = require('./task/favicon');
 
 
 // Сервер
@@ -54,7 +54,7 @@ const watcher = () => {
 // Запуск задач
 exports.clear = clear;
 exports.server = server;
-exports.wather = watcher;
+exports.watcher = watcher;
 exports.htmlTask = html;
 exports.scss = scss;
 exports.js = js;
@@ -67,10 +67,10 @@ exports.assets = assets;
 exports.zip = zip;
 exports.ftp = ftp;
 
-exports.favicon = series(nameFavTask, genFavTask, insertFavTask);
-exports.nameFav = nameFavTask;
-exports.genFav = genFavTask;
-exports.insertFav = insertFavTask;
+exports.favicon = series(nameFav, genFav, insertFav);
+exports.nameFav = nameFav;
+exports.genFav = genFav;
+exports.insertFav = insertFav;
 
 
 // Сборка
