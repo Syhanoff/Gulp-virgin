@@ -1,6 +1,6 @@
 // module.exports = {
 
-   
+
 // }
 // $(document).ready(function(){
 //   $('.carousel__inner').slick({

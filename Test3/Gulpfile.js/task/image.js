@@ -7,6 +7,7 @@ const notify = require("gulp-notify");
 const changed = require('gulp-changed');
 const imagemin = require('gulp-imagemin');
 const imgSharp = require("gulp-sharp-responsive");
+const gulpif = require('gulp-if');
 
 
 // Конфигурация
@@ -27,7 +28,7 @@ const imgTask = () => {
     .pipe(dest(route.img.dest))
     .pipe(src(route.img.src))
     .pipe(changed(route.img.dest))
-    .pipe(imagemin(setting.imagemin))
+    .pipe(gulpif(setting.isProd, imagemin(setting.imagemin)))
     .pipe(dest(route.img.dest))
 }
 

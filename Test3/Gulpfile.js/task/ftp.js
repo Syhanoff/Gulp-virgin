@@ -12,12 +12,12 @@ const ftp = require('vinyl-ftp');
 
 // Конфигурация
 const route = require('../config/route');
-const ftpFolder = require('../config/ftp');
+const ftpRoute = require('../config/ftp');
 
 
 // Деплой на сервер
 const ftpTask = () => {
-  let configFTP = ftp.create (ftp.config);
+  let configFTP = ftp.create (ftpRoute.config);
   configFTP.log = util.log
   return src(route.deploy.src, {})
     .pipe(plumber(
@@ -26,7 +26,8 @@ const ftpTask = () => {
       message: "Error: <%= error.message %>"
       })
     ))
-    .pipe(configFTP.dest(`/${ftpFolder}/${rootFolder}`));
+    .pipe(configFTP.newer(`/${ftpRoute.ftpFolder}/${rootFolder}`))
+    .pipe(configFTP.dest(`/${ftpRoute.ftpFolder}/${rootFolder}`));
 }
 
 module.exports = ftpTask;

@@ -5,14 +5,7 @@ const browserSync = require('browser-sync').create();
 
 // Конфигурация
 const route = require('./config/route');
-// const prod = require('./config/prod');
-// const isProd = require('../config/prod');
-let isProd = false;
-
-const toProd = (done) => {
-  isProd = true;
-  done();
-};
+const setting = require('./config/setting');
 
 
 // Задачи
@@ -49,7 +42,7 @@ const server = () => {
 // Наблюдение
 const watcher = () => {
   watch(route.html.watch, html);
-  watch(route.scss.watch, scss);
+  watch(route.scss.watch, scss).on('change', browserSync.reload);
   watch((route.fonts.watch), fonts).on('change', browserSync.reload);
   watch((route.fonts.dest), fontFace).on('change', browserSync.reload);
   watch((route.img.watch), img).on('change', browserSync.reload);
@@ -83,7 +76,15 @@ exports.insertFav = insertFav;
 
 
 // Сборка
-exports.default = series(clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, parallel(watcher, server));
-exports.build = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss);
-exports.deployZip = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, zip);
-exports.deployFtp = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, ftp);
+// exports.default = series(clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, parallel(watcher, server));
+// exports.build = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss);
+// exports.deployZip = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, zip);
+// exports.deployFtp = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, ftp);
+
+
+const build = series(clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss);
+const dev = series(build, parallel(watcher, server));
+
+exports.default = setting.isProd ? build : dev;
+exports.deployZip = series(build, zip);
+exports.deployFtp = series(build, ftp);

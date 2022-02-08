@@ -11,7 +11,7 @@ module.exports = {
   scss: {
     src: routeSrc + "scss/style.+(scss|sass)",
     srcLibs: routeSrc + "scss/libs.+(scss|sass)",
-    watch: routeSrc + "scss/**/*.+(scss|sass|css)",
+    watch: [routeSrc + "scss/**/*.+(scss|sass|css)", "!" + routeSrc + "scss/libs/*.*"],
     dest: routeDest + "css/"
   },
   fonts: {

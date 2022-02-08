@@ -1,4 +1,10 @@
+const isProd = process.argv.includes("--production");
+const isDev = !isProd;
+
 module.exports = {
+  isProd: isProd,
+  isDev: isDev,
+
   typograf: {
     locale: ['ru', 'en-US']
   },

@@ -1,8 +1,7 @@
 .promo {
   padding: 21px 0 93px;
-  background: url('@img/bg.jpg') no-repeat center top / cover;
-
-  // @include bg-url('../img/bg.jpg', '../img/bg.webp', '../img/bg.avif') ;
+  @include bg-cover;
+  @include image-set("@img/bg");
   &__wrapper {
     display: flex;
     flex-direction: column;

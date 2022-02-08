@@ -10,12 +10,12 @@ const babel = require('gulp-babel');
 
 // Конфигурация
 const route = require('../config/route');
-const isProd = require('../config/prod');
+const setting = require('../config/setting');
 
 
 // Обработка JavaScript
 const scriptsTask = () => {
-  return src(route.js.src, { sourcemaps: !isProd })
+  return src(route.js.src, { sourcemaps: setting.isDev })
     .pipe(plumber(
       notify.onError({
       title: "JS",
@@ -24,7 +24,7 @@ const scriptsTask = () => {
     ))
     .pipe(babel())
     .pipe(webpack({
-      mode: isProd ? 'production' : 'development',
+      mode: setting.isProd ? 'production' : 'development',
       output: {
         filename: 'main.min.js'
       }
@@ -55,7 +55,7 @@ const scriptsTask = () => {
     //   console.error('WEBPACK ERROR', err);
     //   this.emit('end');
     // })
-    .pipe(dest(route.js.dest));
+    .pipe(dest(route.js.dest), { sourcemaps: setting.isDev });
 }
 
 module.exports = scriptsTask;
