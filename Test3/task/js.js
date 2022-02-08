@@ -10,12 +10,12 @@ const babel = require('gulp-babel');
 
 // Конфигурация
 const route = require('../config/route');
-const noBuild = require('../config/release');
+const isProd = require('../config/prod');
 
 
 // Обработка JavaScript
 const scriptsTask = () => {
-  return src(route.js.src, { sourcemaps: !noBuild })
+  return src(route.js.src, { sourcemaps: !isProd })
     .pipe(plumber(
       notify.onError({
       title: "JS",
@@ -24,7 +24,7 @@ const scriptsTask = () => {
     ))
     .pipe(babel())
     .pipe(webpack({
-      mode: noBuild ? 'production' : 'development',
+      mode: isProd ? 'production' : 'development',
       output: {
         filename: 'main.min.js'
       }

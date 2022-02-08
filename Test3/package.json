@@ -8,8 +8,8 @@
     "code": "editorconfig-checker",
     "dev": "gulp",
     "build": "gulp build",
-    "zip": "gulp zip",
-    "ftp": "gulp ftp"
+    "zip": "gulp deployZip",
+    "ftp": "gulp deployFtp"
   },
   "browserslist": [
     "last 2 versions",

@@ -23,12 +23,18 @@ const group = require('gulp-group-css-media-queries');
 // Конфигурация
 const route = require('../config/route');
 const setting = require('../config/setting');
-const noBuild = require('../config/release');
+// const toProd = require('../config/prod');
+// const isProd = require('../config/prod');
+let isProd = false;
 
+const toProd = (done) => {
+  isProd = true;
+  done();
+};
 
 // Обработка SCSS
 const stylesTask = () => {
-  src(route.scss.srcLibs, { sourcemaps: !noBuild })
+  src(route.scss.srcLibs, { sourcemaps: !isProd })
     .pipe(plumber(
       notify.onError({
       title: "SCSSLibs",
@@ -45,7 +51,7 @@ const stylesTask = () => {
       title: "libs.min.css"
     }))
     .pipe(dest(route.scss.dest));
-  return src(route.scss.src, { sourcemaps: !noBuild })
+  return src(route.scss.src, { sourcemaps: !isProd })
     .pipe(plumber(
       notify.onError({
       title: "SCSS",
@@ -57,20 +63,18 @@ const stylesTask = () => {
     // .pipe(avifWebpCss())
     .pipe(replace(/@img\//g, '../img/'))
     .pipe(shorthand())
-    .pipe(gulpif(noBuild, autoprefixer(setting.autoprefixer)))
-    .pipe(gulpif(noBuild, group()))
+    .pipe(gulpif(isProd, autoprefixer(setting.autoprefixer)))
+    .pipe(gulpif(isProd, group()))
     .pipe(dest(route.scss.dest))
-    .pipe(gulpif(noBuild, size({
+    .pipe(gulpif(isProd, size({
       title: "style.css"
     })))
-    .pipe(gulpif(noBuild, cleanCss({
-      level: 2,
-    })))
+    .pipe(gulpif(isProd, cleanCss(setting.cleanCss)))
     .pipe(rename(setting.rename))
-    .pipe(gulpif(noBuild, size({
+    .pipe(gulpif(isProd, size({
       title: "style.min.css"
     })))
-    .pipe(dest(route.scss.dest, { sourcemaps: !noBuild }))
+    .pipe(dest(route.scss.dest, { sourcemaps: '.' }))
     .pipe(browserSync.stream());
 }
 

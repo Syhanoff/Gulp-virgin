@@ -5,6 +5,14 @@ const browserSync = require('browser-sync').create();
 
 // Конфигурация
 const route = require('./config/route');
+// const prod = require('./config/prod');
+// const isProd = require('../config/prod');
+let isProd = false;
+
+const toProd = (done) => {
+  isProd = true;
+  done();
+};
 
 
 // Задачи
@@ -13,7 +21,6 @@ const scss = require('./task/scss');
 const js = require('./task/js');
 const clear = require('./task/clear');
 const fonts = require('./task/fonts');
-// const fontsTtfTask = require('./task/fonts');
 const fontFace = require('./task/font-face');
 const img = require('./task/image');
 const svg = require('./task/svg');
@@ -21,6 +28,7 @@ const assets = require('./task/assets');
 const zip = require('./task/zip');
 const ftp = require('./task/ftp');
 
+// Задачи favicon
 const nameFav = require('./task/favicon');
 const genFav = require('./task/favicon');
 const insertFav = require('./task/favicon');
@@ -55,7 +63,7 @@ const watcher = () => {
 exports.clear = clear;
 exports.server = server;
 exports.watcher = watcher;
-exports.htmlTask = html;
+exports.html = html;
 exports.scss = scss;
 exports.js = js;
 exports.clear = clear;
@@ -67,6 +75,7 @@ exports.assets = assets;
 exports.zip = zip;
 exports.ftp = ftp;
 
+// Запуск задачи по созданию favicon
 exports.favicon = series(nameFav, genFav, insertFav);
 exports.nameFav = nameFav;
 exports.genFav = genFav;
@@ -75,9 +84,6 @@ exports.insertFav = insertFav;
 
 // Сборка
 exports.default = series(clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, parallel(watcher, server));
-
-
-// exports.default = series(clear, parallel(htmlTask, imgTask, svgTask, fontsEotTask, fontsTtfTask, assetsTask, scriptsTask), fontStyleTask, stylesTask, parallel(watcherTask, serverTask));
-// exports.build = series(toBuild, clear, parallel(htmlTask, imgTask, svgTask, fontsEotTask, fontsTtfTask, assetsTask, scriptsTask), fontStyleTask, stylesTask);
-// exports.deployZip = series(toBuild, clear, parallel(htmlTask, imgTask, svgTask, fontsEotTask, fontsTtfTask, assetsTask, scriptsTask), fontStyleTask, stylesTask, zipTask);
-// exports.deployFtp = series(toBuild, clear, parallel(htmlTask, imgTask, svgTask, fontsEotTask, fontsTtfTask, assetsTask, scriptsTask), fontStyleTask, stylesTask, ftpTask);
+exports.build = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss);
+exports.deployZip = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, zip);
+exports.deployFtp = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, ftp);

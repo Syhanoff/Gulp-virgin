@@ -18,8 +18,15 @@ const htmlmin = require('gulp-htmlmin');
 // Конфигурация
 const route = require('../config/route');
 const setting = require('../config/setting');
-const noBuild = require('../config/release');
+// const toProd = require('../config/prod');
+// const isProd = require('../config/prod');
 
+let isProd = false;
+
+const toProd = (done) => {
+  isProd = true;
+  done();
+};
 
 // Обработка HTML
 const htmlTask = () => {
@@ -34,10 +41,10 @@ const htmlTask = () => {
     .pipe(AvifWebpHtml())
     .pipe(replace(/@img\//g, 'img/'))
     .pipe(typograf(setting.typograf))
-    .pipe(gulpif(noBuild, versions(setting.versions)))
-    .pipe(gulpif(noBuild, size({ title: "html" })))
-    .pipe(gulpif(noBuild, htmlmin(setting.htmlmin)))
-    .pipe(gulpif(noBuild, size({ title: "htmlmin" })))
+    .pipe(gulpif(isProd, versions(setting.versions)))
+    .pipe(gulpif(isProd, size({ title: "html" })))
+    .pipe(gulpif(isProd, htmlmin(setting.htmlmin)))
+    .pipe(gulpif(isProd, size({ title: "htmlmin" })))
     .pipe(dest(route.html.dest))
     .pipe(browserSync.stream());
 }
