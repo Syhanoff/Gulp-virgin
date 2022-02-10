@@ -64,8 +64,9 @@ const checkStyle = (fontname) => {
   return style;
 }
 
-const cb = () => {}
 
+// Включение кода font-face в SCSS
+const cb = () => {}
 const fontFaceTask = (done) => {
 	let file_content = fs.readFileSync(route.fonts.srcFontFace);
 	fs.writeFile((route.fonts.srcFontFace), '', cb);
@@ -87,6 +88,5 @@ const fontFaceTask = (done) => {
 	})
 	done();
 }
-
 
 module.exports = fontFaceTask;

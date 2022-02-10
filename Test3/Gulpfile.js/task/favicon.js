@@ -14,8 +14,7 @@ const route = require('../config/route');
 const setting = require('../config/setting');
 
 
-
-
+// Переименование иконки favicon
 const nameFavTask = () => {
   return src(route.favicon.src)
     .pipe(plumber(
@@ -28,6 +27,8 @@ const nameFavTask = () => {
     .pipe(dest(route.favicon.destIcon))
 }
 
+
+// Создание кода favicon
 const genFavTask = () => {
   realFavicon.generateFavicon({
     masterPicture: route.favicon.srcIcon,
@@ -92,6 +93,8 @@ const genFavTask = () => {
 
 var FAVICON_DATA_FILE = 'faviconData.json';
 
+
+// Установка кода favicon в HTML
 const insertFavTask = () => {
   src(route.favicon.srcInk)
   .pipe(plumber(

@@ -15,6 +15,7 @@ const route = require('../config/route');
 const setting = require('../config/setting');
 
 
+// Обработка image
 const imgTask = () => {
   return src(route.img.srcWeb)
     .pipe(plumber(

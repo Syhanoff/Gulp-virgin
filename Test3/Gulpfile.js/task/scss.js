@@ -1,5 +1,5 @@
 const { src, dest } = require('gulp');
-const browserSync = require('browser-sync').create();
+// const browserSync = require('browser-sync').create();
 
 
 // Плагины

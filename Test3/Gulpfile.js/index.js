@@ -76,15 +76,8 @@ exports.insertFav = insertFav;
 
 
 // Сборка
-// exports.default = series(clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, parallel(watcher, server));
-// exports.build = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss);
-// exports.deployZip = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, zip);
-// exports.deployFtp = series(toProd, clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss, ftp);
-
-
 const build = series(clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss);
 const dev = series(build, parallel(watcher, server));
-
 exports.default = setting.isProd ? build : dev;
 exports.deployZip = series(build, zip);
 exports.deployFtp = series(build, ftp);
