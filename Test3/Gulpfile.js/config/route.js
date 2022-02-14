@@ -34,14 +34,17 @@ module.exports = {
     dest: routeDest + "img/svg"
   },
   favicon: {
-    src: routeSrc + "assets/favicon/*.png",
+    src: routeSrc + "assets/favicon/*.+(png|svg)",
+    watch: routeSrc + "assets/favicon/*.+(png|svg)",
+    dest: routeDest + "favicon/",
+
     srcIcon: routeSrc + "assets/favicon/favicon.png",
     srcInk: routeSrc + "html/parts/favicon.html",
-    watch: routeSrc + "",
+
     destIcon: routeSrc + "assets/favicon/",
     destIconSet: routeSrc + "favicon/",
     destInk: routeSrc + "html/parts/",
-    dest: routeDest + "favicon/",
+
   },
   js: {
     src: routeSrc + "js/main.js",

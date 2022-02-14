@@ -69,6 +69,19 @@ module.exports = {
   },
   renameFav: {
     basename: "favicon"
+  },
+  favicon: {
+    icons: {
+      favicons: true,
+      appleIcon: true,
+      android: true,
+      windows: false,
+      yandex: false,
+      coast: false,
+      firefox: false,
+      appleStartup: false
+    },
+    path: "favicons/",
   }
 }
 

@@ -20,11 +20,12 @@ const svg = require('./task/svg');
 const assets = require('./task/assets');
 const zip = require('./task/zip');
 const ftp = require('./task/ftp');
+const favicon = require('./task/favicon');
 
 // Задачи favicon
-const nameFav = require('./task/favicon');
-const genFav = require('./task/favicon');
-const insertFav = require('./task/favicon');
+// const nameFav = require('./task/favicon');
+// const genFav = require('./task/favicon');
+// const insertFav = require('./task/favicon');
 
 
 // Сервер
@@ -48,6 +49,7 @@ const watcher = () => {
   watch((route.img.watch), img).on('change', browserSync.reload);
   watch((route.svg.watch), svg).on('change', browserSync.reload);
   watch((route.js.watch), js).on('change', browserSync.reload);
+  watch((route.favicon.watch), favicon).on('change', browserSync.reload);
   watch((route.assets.watch), assets);
 }
 
@@ -67,16 +69,17 @@ exports.svg = svg;
 exports.assets = assets;
 exports.zip = zip;
 exports.ftp = ftp;
+exports.favicon = favicon;
 
 // Запуск задачи по созданию favicon
-exports.favicon = series(nameFav, genFav, insertFav);
-exports.nameFav = nameFav;
-exports.genFav = genFav;
-exports.insertFav = insertFav;
+// exports.favicon = series(nameFav, genFav, insertFav);
+// exports.nameFav = nameFav;
+// exports.genFav = genFav;
+// exports.insertFav = insertFav;
 
 
 // Сборка
-const build = series(clear, parallel(html, img, svg, fonts, fontFace, assets, js), scss);
+const build = series(clear, parallel(html, img, favicon, svg, fonts, fontFace, assets, js), scss);
 const dev = series(build, parallel(watcher, server));
 exports.default = setting.isProd ? build : dev;
 exports.deployZip = series(build, zip);
